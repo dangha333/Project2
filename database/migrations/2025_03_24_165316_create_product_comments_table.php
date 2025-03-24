@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('catgories', function (Blueprint $table) {
+        Schema::create('product_comments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+    $table->foreignId('product_id')->constrained('products');
+    $table->foreignId('user_id')->constrained('users');
+    $table->text('comment');
+    $table->timestamps();
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('catgories');
+        Schema::dropIfExists('product_comments');
     }
 };
