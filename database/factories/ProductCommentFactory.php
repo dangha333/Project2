@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class ProductCommentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'product_id' => Product::all()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'comment' => $this->faker->paragraph(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
