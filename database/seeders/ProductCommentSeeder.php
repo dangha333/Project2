@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product_comment;
+use App\Models\ProductComment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,6 @@ class ProductCommentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ProductComment::factory(5)->create();
     }
 }

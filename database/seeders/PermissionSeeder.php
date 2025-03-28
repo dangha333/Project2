@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post_comment;
-use App\Models\PostComment;
+use App\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PostCommentSeeder extends Seeder
+class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-            PostComment::factory(5)->create();
+        Permission::factory(10)->create();
     }
 }

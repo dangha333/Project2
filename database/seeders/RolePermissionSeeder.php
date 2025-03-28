@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role_permission;
+use App\Models\RolePermission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,6 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        RolePermission::factory(5)->create();
     }
 }

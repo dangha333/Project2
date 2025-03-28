@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post_comment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PostComment>
  */
 class PostCommentFactory extends Factory
 {

@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cart_detail>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CartDetail>
  */
 class CartDetailFactory extends Factory
 {

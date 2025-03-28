@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart_detail extends Model
+class CartDetail extends Model
 {
     /** @use HasFactory<\Database\Factories\CartDetailFactory> */
     use HasFactory;
     protected $table = 'cart_details';
+    public $timestamps = false; // ✅ Tắt timestamps
 }
