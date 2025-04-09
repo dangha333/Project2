@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Storage;
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $listProduct = Product::join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.name as categoryName')
-            ->paginate(7);
+        $perPage = $request->input('per_page', 7); // mặc định là 7
+        $query = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as categoryName')->orderBy('id', 'asc')
+           ;
+            if ($perPage === 'all') {
+                $listProduct = $query->paginate(1000000)->withQueryString();
+            } else {
+                $listProduct = $query->paginate((int) $perPage)->withQueryString();
+            }
         return view('products.list', compact('listProduct'));
     }
 
     public function addProduct()
     {
         $categories = Category::select('id', 'name')->get();
-        return view('admin.products.add', compact('categories'));
+        return view('products.add', compact('categories'));
     }
     public function addPostProduct(Request $request)
     {
@@ -33,14 +40,42 @@ class ProductController extends Controller
 
         $data = [
             'name' => $request->name,
-            'category_id' => $request->category,
+            'description' =>$request->description,
             'price' => $request->price,
-            'view' => $request->view,
+            'category_id' => $request->category_id,
+            'created_at' => Carbon::now(),
         
         ];
         Product::create($data);
-        return redirect()->route('admin.products.list-products')->with([
+        return redirect()->route('listProduct')->with([
             'message' => 'Them san pham thanh cong'
+        ]);
+    }
+
+    public function updateProduct($id)
+    {
+        $categories = Category::select('id', 'name')->get();
+        $product = Product::where('id', $id)->first();
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    public function updatePatchProduct($id, Request $request)
+    {
+        $product = Product::findOrFail($id);
+
+        $data = [
+            'name' => $request->name,
+            'description' =>$request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'updated_at' => Carbon::now(),
+        ];
+
+
+        $product->update($data);
+
+        return redirect()->route('listProduct')->with([
+            'message' => 'Sửa sản phẩm thành công'
         ]);
     }
 
@@ -49,7 +84,7 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->first();
        
         $product->delete();
-        return redirect()->route('admin.products.list-products')->with([
+        return redirect()->route('listProduct')->with([
             'message' => 'Xoa pham thanh cong'
         ]);
 
@@ -84,29 +119,5 @@ class ProductController extends Controller
         return view('admin.products.detail', compact('product'));
     }
 
-    public function updateProduct($id)
-    {
-        $categories = Category::select('id', 'name')->get();
-        $product = Product::where('id', $id)->first();
-        return view('admin.products.edit', compact('product', 'categories'));
-    }
-
-    public function updatePatchProduct($id, Request $request)
-    {
-        $product = Product::findOrFail($id);
-
-        $data = [
-            'name' => $request->name,
-            'category_id' => $request->category,
-            'price' => $request->price,
-            'view' => $request->view,
-        ];
-
-
-        $product->update($data);
-
-        return redirect()->route('admin.products.list-products')->with([
-            'message' => 'Sửa sản phẩm thành công'
-        ]);
-    }
+  
 }

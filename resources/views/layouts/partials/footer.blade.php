@@ -1,5 +1,5 @@
 <footer class="bg-light text-center py-3 border-top mt-auto">
-        <div class="container">
-            <p class="mb-0">&copy; {{ date('Y') }} Áo Xinh. All rights reserved.</p>
-        </div>
-    </footer>
+    <div class="container">
+        <small>&copy; {{ date('Y') }} Trang quản trị Áo Xinh.</small>
+    </div>
+</footer>
