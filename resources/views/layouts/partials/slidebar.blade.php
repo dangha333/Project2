@@ -11,7 +11,7 @@
                 <a href="{{ route('listCategory') }}" class="nav-link text-white"> Danh mục</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="" class="nav-link text-white"> Đơn hàng</a>
+                <a href="{{ route('listOrder') }}" class="nav-link text-white"> Đơn hàng</a>
             </li>
             <li class="nav-item mb-2">
                 <a href="" class="nav-link text-white"> Giỏ hàng</a>

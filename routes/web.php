@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,6 @@ Route::post('addPostCategory', [CategoryController::class, 'addPostCategory'])->
 Route::get('updateCategory/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
 Route::patch('updateCategory/{id}', [CategoryController::class, 'updatePatchCategory'])->name('updatePatchCategory');
 Route::delete('deleteCategory/{id}', [CategoryController::class, 'deleteCategory'])->name('deleteCategory');
+
+Route::get('listOrder', [OrderController::class, 'index'])->name('listOrder');
+Route::get('listOrderDetail/{id}', [OrderController::class, 'listOrderDetail'])->name('listOrderDetail');

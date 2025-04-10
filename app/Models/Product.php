@@ -11,6 +11,7 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     public $primarykey = 'id';
+    
     public $fillable = [
         'category_id',
         'name',
@@ -19,4 +20,8 @@ class Product extends Model
         'created_at',
         'updated_at',
     ];
+    public function orderDetails()
+{
+    return $this->hasMany(OrderDetail::class);
+}
 }

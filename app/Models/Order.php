@@ -10,4 +10,13 @@ class Order extends Model
     /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
     protected $table = 'orders';
+    public $primarykey = 'id';
+    public function orderDetails()
+{
+    return $this->hasMany(OrderDetail::class);
+}
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }
